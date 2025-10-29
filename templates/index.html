@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNS Legal Assistant - AI-Powered Legal Research</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-text">BNS Legal</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Demo</a>
+                <a href="#about">About</a>
+                <button id="viewBnsBtn" class="btn-view-bns">View BNS Document</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line-1">AI-Powered Legal Research</span>
+                    <span class="title-line-2">for Bharatiya Nyaya Sanhita</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Get instant legal interpretations with our advanced RAG system. 
+                    <span class="highlight">Powered by Neo4j, LLMs, and semantic search.</span>
+                </p>
+                <div class="hero-cta">
+                    <a href="#demo" class="btn-primary-hero">Try It Now</a>
+                    <a href="#about" class="btn-secondary-hero">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Query Understanding</h3>
+                    <p>Advanced LLM-based intent extraction for accurate legal queries</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Hybrid Search</h3>
+                    <p>Combines vector embeddings with keyword matching</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Knowledge Graph</h3>
+                    <p>Neo4j-powered graph traversal for contextual retrieval</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-time Analysis</h3>
+                    <p>Streaming responses with live progress updates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">Try the System</h2>
+            
+            <!-- Query Input -->
+            <div class="query-box">
+                <label for="queryInput" class="query-label">Enter your legal query</label>
+                <textarea 
+                    id="queryInput"
+                    class="query-input"
+                    placeholder="Example: What is the punishment for theft?
+Or paste a news article about a crime incident..."
+                    rows="5"
+                ></textarea>
+                <button id="analyzeBtn" class="btn-analyze">
+                    <span class="btn-text">Analyze Query</span>
+                    <span class="loader" style="display: none;"></span>
+                </button>
+            </div>
+
+            <!-- Processing Logs -->
+            <div id="logsSection" class="logs-section" style="display: none;">
+                <h3 class="logs-title">Processing</h3>
+                <div id="logsBox" class="logs-box"></div>
+            </div>
+
+            <!-- Results -->
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <!-- Matched Offense -->
+                <div id="matchedNodeBox" class="result-card" style="display: none;">
+                    <h3 class="result-title">Matched Offense</h3>
+                    <div class="result-content">
+                        <div class="result-row">
+                            <span class="result-label">Offense:</span>
+                            <span id="nodeName" class="result-value"></span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Confidence:</span>
+                            <span id="similarityScore" class="result-value confidence"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Context -->
+                <div id="contextBox" class="result-card" style="display: none;">
+                    <details class="context-details">
+                        <summary class="context-summary">View Retrieved Context</summary>
+                        <pre id="contextContent" class="context-content"></pre>
+                    </details>
+                </div>
+
+                <!-- Answer -->
+                <div id="answerBox" class="result-card answer-card" style="display: none;">
+                    <h3 class="result-title">Legal Interpretation</h3>
+                    <div id="answerContent" class="answer-content"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About This Project</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>What is this?</h3>
+                    <p>A Retrieval-Augmented Generation system for Bharatiya Nyaya Sanhita using Neo4j knowledge graphs and LLMs.</p>
+                </div>
+                <div class="about-card">
+                    <h3>How it works</h3>
+                    <p>Combines semantic search, graph traversal, and AI to provide accurate legal interpretations.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Technology</h3>
+                    <p>Built with Neo4j, LangChain, Groq LLMs, Flask, and advanced embeddings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">BNS Legal Assistant - For informational purposes only</p>
+            <p class="footer-disclaimer">Not legal advice. Consult a qualified professional for legal matters.</p>
+        </div>
+    </footer>
+
+    <!-- BNS PDF Modal -->
+    <div id="bnsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Bharatiya Nyaya Sanhita (BNS) - 2023</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <iframe 
+                    id="pdfViewer" 
+                    src="/BNS.pdf" 
+                    width="100%" 
+                    height="100%"
+                    frameborder="0">
+                </iframe>
+            </div>
+            <div class="modal-footer">
+                <a href="/BNS.pdf" download="BNS.pdf" class="btn-download">Download PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
